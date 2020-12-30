@@ -1,5 +1,5 @@
-import { makeRequest } from 'core/utils/request';
 import React, { useState } from 'react';
+import { makePrivateRequest } from 'core/utils/request';
 import BaseForm from '../../BaseForm';
 import './styles.scss';
 
@@ -34,7 +34,7 @@ const Form = () => {
             imgUrl: 'https://images-americanas.b2w.io/produtos/01/00/item/116779/9/116779925_1GG.jpg',
             categories: [{ id: formData.category }]
         }
-        makeRequest({ url: '/products', method: 'POST', data: payload }).then(() => {
+        makePrivateRequest({ url: '/products', method: 'POST', data: payload }).then(() => {
             setFormData({ name: '', category: '', price: '', description: '' });
         });
     }
