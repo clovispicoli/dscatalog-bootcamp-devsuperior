@@ -7,7 +7,7 @@ import ButtonIcon from 'core/components/ButtonIcon';
 import AuthCard from '../Card';
 import './styles.scss';
 
-type FormData = {
+type FormState = {
     username: string;
     password: string;
 }
@@ -17,14 +17,14 @@ type LocationState = {
 }
 
 const Login = () => {
-    const { register, handleSubmit, errors } = useForm<FormData>();
+    const { register, handleSubmit, errors } = useForm<FormState>();
     const [hasError, setHasError] = useState(false);
     const history = useHistory();
     let location = useLocation<LocationState>();
 
     const { from } = location.state || { from: { pathname: "/admin" } };
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = (data: FormState) => {
         makeLogin(data)
             .then(response => {
                 setHasError(false);
@@ -46,7 +46,7 @@ const Login = () => {
                 </div>
             )}
             <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-                <div className="margin-botton-30">
+                <div className="margin-bottom-30">
                     <input
                         type="email"
                         className={`form-control imput-base ${errors.username ? 'is-invalid' : ''}`}
@@ -66,7 +66,7 @@ const Login = () => {
                         </div>
                     )}
                 </div>
-                <div className="margin-botton-30">
+                <div className="margin-bottom-30">
                     <input
                         type="password"
                         className={`form-control imput-base ${errors.password ? 'is-invalid' : ''}`}
