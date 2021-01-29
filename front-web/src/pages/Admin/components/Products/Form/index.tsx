@@ -45,7 +45,7 @@ const Form = () => {
     useEffect(() => {
         setIsLoadingCategories(true);
         makeRequest({ url: '/categories' })
-        .then(response => setCategories(response.data.content))
+        .then((response) => setCategories(response.data.content))
         .finally(() => setIsLoadingCategories(false));
     }, []);
 
