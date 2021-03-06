@@ -7,8 +7,10 @@ import { makePrivateRequest, makeRequest } from 'core/utils/request';
 import { Category } from 'core/types/Product';
 import BaseForm from '../../BaseForm';
 import './styles.scss';
+import PriceField from './PriceField';
+import ImageUpload from '../ImageUpload';
 
-type FormState = {
+export type FormState = {
     name: string;
     price: string;
     description: string;
@@ -45,7 +47,7 @@ const Form = () => {
     useEffect(() => {
         setIsLoadingCategories(true);
         makeRequest({ url: '/categories' })
-        .then(response => setCategories(response.data.content))
+        .then((response) => setCategories(response.data.content))
         .finally(() => setIsLoadingCategories(false));
     }, []);
 
@@ -101,6 +103,7 @@ const Form = () => {
                                 getOptionValue={(option: Category) => String(option.id)}
                                 classNamePrefix="categories-select"
                                 placeholder="Categorias"
+                                defaultValue=""
                                 isMulti
                             />
                              {errors.categories && (
@@ -110,13 +113,7 @@ const Form = () => {
                             )}
                         </div>
                         <div className="margin-bottom-30">
-                            <input
-                                ref={register({ required: "Campo obrigatório" })}
-                                name="price"
-                                type="number"
-                                className="form-control imput-base"
-                                placeholder="Preço"
-                            />
+                           <PriceField control={control}/>
                             {errors.price && (
                                 <div className="invalid-feedback d-block">
                                     {errors.price.message}
@@ -124,18 +121,7 @@ const Form = () => {
                             )}
                         </div>
                         <div className="margin-bottom-30">
-                            <input
-                                ref={register({ required: "Campo obrigatório" })}
-                                name="imgUrl"
-                                type="text"
-                                className="form-control imput-base"
-                                placeholder="Imagem do produto"
-                            />
-                            {errors.imgUrl && (
-                                <div className="invalid-feedback d-block">
-                                    {errors.imgUrl.message}
-                                </div>
-                            )}
+                            <ImageUpload />
                         </div>
                     </div>
                     <div className="col-6">

@@ -29,9 +29,7 @@ const Login = () => {
             .then(response => {
                 setHasError(false);
                 saveSessionData(response.data);
-                history.push(from);
-
-                
+                history.replace(from);
             })
             .catch(() => {
                 setHasError(true);
