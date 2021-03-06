@@ -34,7 +34,7 @@ public class ProductResource {
 
 	@GetMapping
 	public ResponseEntity<Page<ProductDTO>> findAll(
-			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
+			@RequestParam(value = "categoryid", defaultValue = "0") Long categoryId,
 			@RequestParam(value = "name", defaultValue = "") String name,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
@@ -67,7 +67,7 @@ public class ProductResource {
 		UriDTO dto = service.uploadFile(file);
 		return ResponseEntity.ok().body(dto);
 	}
-			
+
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO dto){
 		dto = service.update(id, dto);
