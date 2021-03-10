@@ -32,11 +32,11 @@ public class S3Service {
 			String originalName = file.getOriginalFilename();
 			String extension = FilenameUtils.getExtension(originalName);
 			String fileName = Instant.now().toDate().getTime() + "." + extension;
-			
+
 			InputStream is = file.getInputStream();
 			String contentType = file.getContentType();
 			return uploadFile(is, fileName, contentType);
-			
+
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException(e.getMessage());
@@ -45,6 +45,7 @@ public class S3Service {
 
 	private URL uploadFile(InputStream is, String fileName, String contentType) {
 		ObjectMetadata meta = new ObjectMetadata();
+		meta.setContentType(contentType);
 		LOG.info("Upload start");
 		s3client.putObject(bucketName, fileName, is, meta);
 		LOG.info("Upload finish");
