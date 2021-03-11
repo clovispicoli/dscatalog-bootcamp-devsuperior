@@ -40,7 +40,7 @@ const Card = ({ product, onRemove }: Props) => {
                         type="button"
                         className="btn btn-outline-secondary btn-block border-radius-10 mb-3"
                     >
-                        EDITAR
+                            EDITAR
                     </Link>
                     <button
                         type="button"

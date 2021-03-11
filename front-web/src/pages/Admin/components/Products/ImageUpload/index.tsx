@@ -1,31 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as UploadPlaceholder } from 'core/assets/images/upload-placeholder.svg';
-import './styles.scss';
 import { makePrivateRequest } from 'core/utils/request';
+import { toast } from 'react-toastify';
+import './styles.scss';
 
-const ImageUpload = () => {
+type Props = {
+    onUploadSucess: (imgUrl: string) => void;
+    productImgUrl: string;
+}
+
+const ImageUpload = ({ onUploadSucess, productImgUrl }: Props) => {
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const [uploadImgUrl, setUploadImgUrl] = useState('');
+    const imgUrl = uploadImgUrl || productImgUrl;
+
     const onUploadProgress = (progressEvent: ProgressEvent) => {
         const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
 
-        console.log(progress)
+        setUploadProgress(progress);
     }
 
     const uploadImage = (selectedImage: File) => {
         const payload = new FormData();
         payload.append('file', selectedImage);
 
-        makePrivateRequest({ 
-            url: '/products/image', 
+        makePrivateRequest({
+            url: '/products/image',
             method: 'POST',
-            data: payload,  
+            data: payload,
             onUploadProgress
         })
-        .then(() => {
-            console.log('arquivo enviado com sucesso')
-        })
-        .catch(() => {
-            console.log('Erro ao enviar o arquivo')
-        })
+            .then((response) => {
+                setUploadImgUrl(response.data.uri);
+                onUploadSucess(response.data.uri);
+            })
+            .catch(() => {
+                toast.error('Erro ao enviar arquivo!')
+            })
+            .finally(() => setUploadProgress(0))
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,9 +52,9 @@ const ImageUpload = () => {
         <div className="row">
             <div className="col-6">
                 <div className="upload-button-container">
-                    <input 
+                    <input
                         type="file"
-                        id="upload" 
+                        id="upload"
                         accept="image/png, image/jpg"
                         onChange={handleChange}
                         hidden
@@ -50,16 +62,30 @@ const ImageUpload = () => {
                     <label htmlFor="upload">ADICIONAR IMAGEM</label>
                 </div>
                 <small className="upload-text-helper text-primary">
-                As imagens devem ser JPG ou PNG e não devem ultrapassar <strong>5 mb.</strong>
+                    As imagens devem ser JPG ou PNG e não devem ultrapassar <strong>5 mb.</strong>
                 </small>
             </div>
             <div className="col-6 upload-placeholder">
-                <UploadPlaceholder />
-                <div className="upload-progress-container">
-                    <div className="upload-pogress">
-                    
-                    </div>
-                </div>
+                {uploadProgress > 0 && (
+                    <>
+                        <UploadPlaceholder />
+                        <div className="upload-progress-container">
+                            <div
+                                className="upload-pogress"
+                                style={{
+                                    width: `${uploadProgress}%`
+                                }}>
+                            </div>
+                        </div>
+                    </>
+                )}
+                {(imgUrl && uploadProgress === 0)&& (
+                    <img    
+                        src={imgUrl}
+                        alt={imgUrl}
+                        className="uploaded-image"
+                    />
+                )}
             </div>
         </div>
     )
