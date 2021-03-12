@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ReactComponent as ArrowIcon } from 'core/assets/images/arrow.svg';
-import ProductPrice from 'core/components/ProductPrice';
 import { Product } from 'core/types/Product';
 import { makeRequest } from 'core/utils/request';
+import { stateFromHTML } from 'draft-js-import-html';
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState } from 'draft-js';
+import ProductPrice from 'core/components/ProductPrice';
 import ProductDescriptionLoader from '../Loaders/ProductDescriptionLoader';
 import ProductInfoLoader from '../Loaders/ProductInfoLoader';
 import './styles.scss';
@@ -16,8 +19,8 @@ const ProductDetails = () => {
     const { productId } = useParams<ParamsType>();
     const [product, setProduct] = useState<Product>();
     const [isLoading, setIsLoading] = useState(false);
-
-    console.log(isLoading);
+    const contentState = stateFromHTML(product?.description || '');
+    const descriptionAsEditorState = EditorState.createWithContent(contentState);
 
     useEffect(() => {
         setIsLoading(true);
@@ -53,9 +56,12 @@ const ProductDetails = () => {
                                 <h1 className="product-description-title">
                                     Descrição do produto
                                 </h1>
-                                <p className="product-description-text">
-                                    {product?.description}
-                                </p>
+                                <Editor
+                                    editorClassName="product-description-text"
+                                    editorState={descriptionAsEditorState}
+                                    toolbarHidden
+                                    readOnly
+                                />
                             </>
                         )}
 
