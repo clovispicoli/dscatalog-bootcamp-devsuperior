@@ -26,12 +26,11 @@ const Card = ({ product, onRemove }: Props) => {
                     </h3>
                     <ProductPrice price={product.price} />
                     <div >
+                      {product.categories.map(category => (
                         <span className="badge badge-pill badge-secondary mr-2">
-                            Categoria 1
+                            {category.name}
                         </span>
-                        <span className="badge badge-pill badge-secondary mr-2">
-                            Categoria 2
-                        </span>
+                      ))}
                     </div>
                 </div>
                 <div className="col-3 pt-3 pr-5">
