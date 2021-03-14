@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { makePrivateRequest, makeRequest } from 'core/utils/request';
 import Pagination from 'core/components/Pagination';
+// import ProductFilters from 'core/components/ProductFilters';
 import Card from '../Card';
 import CardLoader from '../Loaders/ProductCardLoader';
 
@@ -11,12 +12,15 @@ const List = () => {
     const [categoriesResponse, setCategoriesResponse] = useState<CategoriesResponse>();
     const [isLoading, setIsLoading] = useState(false);
     const [activePage, setActivePage] = useState(0);
+    // const [category, setCategory] = useState<Category>();
+    // const [name, setName] = useState('');
     const history = useHistory();
 
     const getCategories = useCallback(() => {
         const params = {
             page: activePage,
             linesPerPage: 4,
+            // name,
             direction: 'DESC',
             orderBy: 'id'
         }
@@ -51,11 +55,35 @@ const List = () => {
         }
     }
 
+    // const handleChangeName = (name: string) => {
+    //     setActivePage(0);
+    //     setName(name);
+    // }
+
+    // const handleChangeCategory = (category: Category) => {
+    //     setActivePage(0);
+    //     setCategory(category);
+    // }
+
+    // const clearFilters = () => {
+    //     setActivePage(0);
+    //     setCategory(undefined);
+    //     setName('');
+    // }
+
     return (
-        <div className="admin-categories-list">
+        <div className="admin-products-list">
+        <div className="d-flex justify-content-between">
             <button className="btn btn-primary btn-lg" onClick={handleCreate}>
                 ADICIONAR
-            </button>
+        </button>
+            {/* <ProductFilters
+                category={category}
+                handleChangeCategory={handleChangeCategory}
+                handleChangeName={handleChangeName}
+                clearFilters={clearFilters}
+            /> */}
+        </div>
             <div className="admin-list-container">
                 {isLoading ? <CardLoader /> : (
                     categoriesResponse?.content.map(category => (
