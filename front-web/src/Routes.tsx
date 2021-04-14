@@ -7,6 +7,7 @@ import ProductDetails from './pages/Catalog/components/ProductDetails';
 import Home from './pages/Home';
 import Auth from './pages/Auth';
 import history from './core/utils/history';
+import Users from 'pages/Admin/components/Users';
 
 const Routes = () => (
     <Router history={history}>
@@ -23,6 +24,9 @@ const Routes = () => (
          </Route>
          <Route path="/categories/:categoryId"> 
             <ProductDetails />
+         </Route>
+         <Route path="/users/:userId"> 
+            <Users />
          </Route>
          <Redirect from="/auth" to="/auth/login" exact/>
          <Route path="/auth">
