@@ -95,7 +95,7 @@ const Form = () => {
             <BaseForm
                 title={formTitle}
             >
-                <div className="row">
+                <div className="product-form-container">
                     <div className="col-6">
                         <div className="margin-bottom-30">
                             <input
@@ -106,7 +106,7 @@ const Form = () => {
                                 })}
                                 name="name"
                                 type="text"
-                                className="form-control imput-base"
+                                className="form-control input-base"
                                 placeholder="Nome do produto"
                             />
                             {errors.name && (

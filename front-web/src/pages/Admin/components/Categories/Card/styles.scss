@@ -9,3 +9,18 @@
     letter-spacing: -0.015em;
     margin: 20px;
 }
+
+@media (max-width: 576px) {
+   .pt-3 {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px 0px;
+   }
+
+   .pr-5 {
+        display:grid;
+   }
+}
