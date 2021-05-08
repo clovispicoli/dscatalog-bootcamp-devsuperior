@@ -32,10 +32,15 @@ const ProductDetails = () => {
                     <h1 className="text-goback">voltar</h1>
                 </Link>
                 <div className="product-details-info">
-                        {isLoading ? <ProductInfoLoader /> : (
+                        {isLoading ? (
+                        <ProductInfoLoader />
+                        ) : (
                             <>
                                 <div className="product-details-card text-center">
-                                    <img src={product?.imgUrl} alt={product?.name} className="product-details-image" />
+                                    <img 
+                                        src={product?.imgUrl} 
+                                        alt={product?.name} 
+                                        className="product-details-image" />
                                 </div>
                                 <div className="product-info-fields" >
                                     <h1 className="product-details-name">
@@ -46,7 +51,9 @@ const ProductDetails = () => {
                             </>
                         )}
                     <div className="product-details-card">
-                        {isLoading ? <ProductDescriptionLoader /> : (
+                        {isLoading ? (
+                            <ProductDescriptionLoader />
+                            ) : (
                             <> 
                                 <h1 className="product-description-title">
                                     Descrição do produto

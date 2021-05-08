@@ -23,6 +23,7 @@
     display: flex;
     flex: 1;
     justify-content: center;
+    align-items: flex-end;
     flex-wrap: nowrap;
 }
 
@@ -50,6 +51,7 @@
     }
 }
 
+// Tablet adjustments
 @media (max-width: 768px) {
     .menu-container {
         justify-content: flex-end;

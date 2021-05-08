@@ -5,10 +5,11 @@ export type UsersResponse = {
 
 export type User = {
     id: number;
-    firtName: string;
+    firstName: string;
     lastName: string;
     email: string;
     password: string;
+    users: User[];
 }
 
 export type Category = {

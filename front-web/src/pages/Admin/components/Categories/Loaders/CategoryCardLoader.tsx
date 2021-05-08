@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const CardLoader = () => (
+const CategoryCardLoader = () => (
   <ContentLoader 
     speed={1}
     width="100%"
@@ -14,4 +14,4 @@ const CardLoader = () => (
   </ContentLoader>
 )
 
-export default CardLoader;
+export default CategoryCardLoader;

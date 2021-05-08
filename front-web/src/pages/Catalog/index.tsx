@@ -4,8 +4,8 @@ import { Category, ProductsResponse } from 'core/types/Product';
 import Pagination from 'core/components/Pagination';
 import { makeRequest } from 'core/utils/request';
 import ProductCard from './components/ProductCard';
-import ProductCardLoader from './components/Loaders/ProductCardLoader';
 import ProductFilters from 'core/components/ProductFilters';
+import ProductCardLoader from './components/Loaders/ProductCardLoader';
 import './styles.scss';
 
 const Catalog = () => {
@@ -48,14 +48,14 @@ const Catalog = () => {
         setActivePage(0);
         setCategory(undefined);
         setName('');
-    }
+    };
 
     return (
         <div className="catalog-container">
             <div className="filter-container">
                 <h1 className="catalog-title">
                     Catálogo de produtos
-           </h1>
+                </h1>
                 <ProductFilters
                     name={name}
                     category={category}
@@ -65,7 +65,9 @@ const Catalog = () => {
                 />
             </div>
             <div className="catalog-products">
-                {isLoading ? <ProductCardLoader /> : (
+                {isLoading ? (
+                    <ProductCardLoader />
+                    ) : (
                     productsResponse?.content.map(product => (
                         <Link to={`/products/${product.id}`} key={product.id}>
                             <ProductCard product={product} />
@@ -76,6 +78,7 @@ const Catalog = () => {
             {productsResponse && (
                 <Pagination
                     totalPages={productsResponse.totalPages}
+                    activePage={activePage}
                     onChange={page => setActivePage(page)}
                 />
             )}

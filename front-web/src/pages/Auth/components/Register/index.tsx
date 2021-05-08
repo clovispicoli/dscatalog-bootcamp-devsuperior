@@ -21,7 +21,7 @@ const Register = () => {
     const history = useHistory();
     let location = useLocation<LocationState>();
 
-    const { from } = location.state || { from: { pathname: "/catalog" } };
+    const { from } = location.state || { from: { pathname: "/admin" } };
 
     const onSubmit = (data: FormState) => {
         makeLogin(data)
@@ -134,7 +134,7 @@ const Register = () => {
                 <Link to="/auth" className="btn btn-outline-danger border-radius-10 mr-3">
                         CANCELAR
                 </Link>
-                <Link to="/products" className="btn btn-primary border-radius-10">
+                <Link to="/admin/users" className="btn btn-primary border-radius-10">
                         CADASTRAR
                 </Link>
             </div>

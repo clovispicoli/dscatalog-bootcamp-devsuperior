@@ -1,19 +1,21 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import List from './List';
+import Form from './Form';
 
 const Users = () => {
     return (
         <div>
             <Switch>
                 <Route path="/admin/users" exact>
-                    <h1>List</h1>
+                    <List />
                 </Route>
                 <Route path="/admin/users/:userId">
-                    <h1>Form</h1>
+                    <Form />
                 </Route>
             </Switch>
         </div>
     );
 }
 
-export default Users;
+export default Users;           

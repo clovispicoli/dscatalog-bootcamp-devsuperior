@@ -1,7 +1,8 @@
 import jwtDecode from 'jwt-decode';
 import history from './history';
-export const CLIENT_ID = 'dscatalog';
-export const CLIENT_SECRET = 'dscatalog123';
+
+export const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'dscatalog';
+export const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'dscatalog123';
 
 type LoginResponse = {
     access_token: string;
@@ -10,7 +11,6 @@ type LoginResponse = {
     scope: string,
     userFirstName: string,
     userId:  number;
-
 }
 
 export type Role = 'ROLE_OPERATOR' | 'ROLE_ADMIN';
@@ -47,7 +47,7 @@ export const getAccessTokenDecoded = () => {
 export const isTokenValid = () => {
     const { exp } = getAccessTokenDecoded();
 
-    return Date.now() <= exp * 1000;
+   return Date.now() <= exp * 1000;
 }
 
 export const isAuthenticated = () => {

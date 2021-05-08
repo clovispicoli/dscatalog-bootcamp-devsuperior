@@ -14,22 +14,23 @@ const Navbar = () => {
         setCurrentUser(userCurrentData.user_name);
     }, [location]);
 
-    const handleLogout = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    const handleLogout = (
+        event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+        ) => {
         event.preventDefault();
         logout();
-    }
+    };
     return (
         <nav className="bg-primary main-nav">   
-        
                 <Link to="/" className="nav-logo-text">
                     <h4>DS Catalog</h4>
                 </Link>
                 <button 
-                    className="menu-mobile-btn" 
                     type="button" 
                     onClick={() => setDrawerActive(!drawerActive)}
+                    className="menu-mobile-btn" 
                 > 
-                    <img src={menu} alt="Mobile Menu"/>
+                    <img src={menu} alt="mobile menu icon"/>
                 </button>
          
             <div className={ drawerActive ? "menu-mobile-container" : "menu-container"}>
@@ -37,24 +38,27 @@ const Navbar = () => {
                     <li>
                         <NavLink 
                             to="/" 
-                            exact className="nav-link" 
                             onClick={() => setDrawerActive(false)} 
+                            exact 
+                            className="nav-link" 
                             >
-                                HOME
+                            HOME
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/products" 
-                            className="nav-link" 
+                        <NavLink 
+                            to="/products" 
                             onClick={() => setDrawerActive(false)} 
+                            className="nav-link" 
                         >
                             CATÁLOGO
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/admin" 
-                            className="nav-link" 
+                        <NavLink 
+                            to="/admin" 
                             onClick={() => setDrawerActive(false)} 
+                            className="nav-link" 
                         >
                             ADMIN
                         </NavLink>
@@ -99,10 +103,7 @@ const Navbar = () => {
                         <a 
                             href="#logout" 
                             className="nav-link active d-inline"
-                            onClick={(e) => {
-                                setDrawerActive(false);
-                                handleLogout(e);
-                            }}
+                            onClick={handleLogout}
                         >
                             LOGOUT
                         </a>
@@ -111,7 +112,6 @@ const Navbar = () => {
                 {!currentUser && (
                     <Link 
                         to="/auth/login" 
-                        onClick={() => setDrawerActive(false)} 
                         className="nav-link active">
                         LOGIN
                     </Link>
